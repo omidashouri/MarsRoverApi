@@ -3,11 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>Mars Rover Api App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous"/>
 </head>
 <body>
-<h2>Welcome to the Mars Rover Api</h2>
+<div class="container">
+    <h2>Welcome to the Mars Rover Api</h2>
 
-<div th:text="${name}">static hi there</div>
+    <div th:text="${name}">static hi there</div>
 
+    <div class="row">
+        <div class="col-sm">
+            <img th:src="${marsRoverData.photos[0].imgSrc}" class="img-fluid" alt="...">
+        </div>
+        <div class="col-sm">
+            <img th:src="${marsRoverData.photos[1].imgSrc}" class="img-fluid" alt="...">
+        </div>
+        <div class="col-sm">
+            <img th:src="${marsRoverData.photos[2].imgSrc}" class="img-fluid" alt="...">
+        </div>
+    </div>
+    <div class="col-sm">
+        <img th:src="${marsRoverData.photos[3].imgSrc}" class="img-fluid" alt="...">
+    </div>
+</div>
+
+<!--    <img th:each="photo : ${marsRoverData.photos}" th:src="${photo.imgSrc}">-->
+</div>
+
+
+<!--<div th:text="${marsRoverData}">static marsRoverData</div>-->
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
 </body>
 </html>
