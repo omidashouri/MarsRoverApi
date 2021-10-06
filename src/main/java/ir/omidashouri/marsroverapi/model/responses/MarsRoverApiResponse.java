@@ -1,4 +1,4 @@
-package ir.omidashouri.marsroverapi.model;
+package ir.omidashouri.marsroverapi.model.responses;
 
 import lombok.Data;
 

@@ -1,12 +1,10 @@
 package ir.omidashouri.marsroverapi.controllers;
 
-import ir.omidashouri.marsroverapi.model.MarsRoverApiResponse;
+import ir.omidashouri.marsroverapi.model.responses.MarsRoverApiResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class HomeControllerTest {
 
