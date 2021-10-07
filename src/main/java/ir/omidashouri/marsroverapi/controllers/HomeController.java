@@ -6,8 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @RequiredArgsConstructor
@@ -16,31 +16,33 @@ public class HomeController {
 
     private final MarsRoverApiService marsRoverApiService;
 
+
     @GetMapping(value = {"/"})
-    public String getHomeView(ModelMap modelMap) {
-//        curiosity opportunity
-        MarsRoverApiResponse marsRoverApiResponse = marsRoverApiService.getRoverData("opportunity");
+    public String getHomeView(ModelMap modelMap, @RequestParam(required = false) String marsApiRoverData) {
+        if (StringUtils.isEmpty(marsApiRoverData)) {
+            marsApiRoverData = "opportunity";
+        }
+        MarsRoverApiResponse marsRoverApiResponse = marsRoverApiService.getRoverData(marsApiRoverData);
         modelMap.put("marsRoverData", marsRoverApiResponse);
         return "index";
     }
 
-/*
-    @GetMapping(value = {"/redirect"})
-    public String redirectPostResponseToHomeView(ModelMap modelMap){
+
+//    change post tget
+/*    @GetMapping(value = {"/"})
+    public String getHomeView(ModelMap modelMap) {
         MarsRoverApiResponse marsRoverApiResponse = marsRoverApiService.getRoverData("opportunity");
         modelMap.put("marsRoverData", marsRoverApiResponse);
         return "index";
     }
-*/
 
     //    when redirect data is not saved in the page
     @PostMapping("/")
     public String getHomeView(ModelMap modelMap, @RequestParam String marsApiRoverData) {
         MarsRoverApiResponse marsRoverApiResponse = marsRoverApiService.getRoverData(marsApiRoverData);
         modelMap.put("marsRoverData", marsRoverApiResponse);
-//        return "index";
         return "redirect:/";
-    }
+    }*/
 
 
     @GetMapping("/1")
