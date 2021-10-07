@@ -11,18 +11,24 @@
 
     <div th:text="${name}">static hi there</div>
 
-    <div class="row">
-        <div class="col-sm">
-            <img th:src="${marsRoverData.photos[0].imgSrc}" class="img-fluid" alt="...">
+    <div aria-label="Basic example" class="btn-group btn-group-lg" role="group" style="margin: 2em 0em;">
+        <button class="btn btn-primary" id="curiosity" type="button">Curiosity</button>
+        <button class="btn btn-primary" id="opportunity" type="button">Opportunity</button>
+        <button class="btn btn-primary" id="spirit" type="button">Spirit</button>
+    </div>
+
+    <div class="row" style="margin-bottom: 2em" th:each="index : ${#numbers.sequence(0,marsRoverData.photos.size(),4)}">
+        <div class="col-sm" th:if="${index < marsRoverData.photos.size()}">
+            <img alt="..." class="img-fluid" th:src="${marsRoverData.photos[index].imgSrc}">
         </div>
-        <div class="col-sm">
-            <img th:src="${marsRoverData.photos[1].imgSrc}" class="img-fluid" alt="...">
+        <div class="col-sm" th:if="${index+1 < marsRoverData.photos.size()}">
+            <img alt="..." class="img-fluid" th:src="${marsRoverData.photos[index+1].imgSrc}">
         </div>
-        <div class="col-sm">
-            <img th:src="${marsRoverData.photos[2].imgSrc}" class="img-fluid" alt="...">
+        <div class="col-sm" th:if="${index+2 < marsRoverData.photos.size()}">
+            <img alt="..." class="img-fluid" th:src="${marsRoverData.photos[index+2].imgSrc}">
         </div>
-        <div class="col-sm">
-            <img alt="..." class="img-fluid" th:src="${marsRoverData.photos[3].imgSrc}">
+        <div class="col-sm" th:if="${index+3 < marsRoverData.photos.size()}">
+            <img alt="..." class="img-fluid" th:src="${marsRoverData.photos[index+3].imgSrc}">
         </div>
     </div>
 </div>
@@ -33,7 +39,7 @@
 
 <!--<div th:text="${marsRoverData}">static marsRoverData</div>-->
 
-
+<script src="/js/index.js" type="text/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
 </body>
 </html>

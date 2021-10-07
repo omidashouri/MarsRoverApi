@@ -13,9 +13,9 @@ public class MarsRoverApiServiceImpl implements MarsRoverApiService {
     private final RestTemplate restTemplate;
 
     @Override
-    public MarsRoverApiResponse getRoverData() {
+    public MarsRoverApiResponse getRoverData(String roverType) {
         ResponseEntity<MarsRoverApiResponse> responseEntity = restTemplate
-                .getForEntity("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=2&api_key=DEMO_KEY", MarsRoverApiResponse.class);
+                .getForEntity("https://api.nasa.gov/mars-photos/api/v1/rovers/" + roverType + "/photos?sol=2&api_key=DEMO_KEY", MarsRoverApiResponse.class);
         return responseEntity.getBody();
     }
 }
