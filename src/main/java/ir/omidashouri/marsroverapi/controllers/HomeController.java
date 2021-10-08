@@ -19,7 +19,8 @@ public class HomeController {
 
     @GetMapping(value = {"/"})
     public String getHomeView(ModelMap modelMap, @RequestParam(required = false) String marsApiRoverData,
-                              @RequestParam(required = false) Integer marsSol) {
+                              @RequestParam(required = false) Integer marsSol,
+                              @RequestParam(required = false) Boolean defaultCheck1) {
         if (StringUtils.isEmpty(marsApiRoverData)) {
             marsApiRoverData = "opportunity";
         }
