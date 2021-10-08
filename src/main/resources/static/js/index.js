@@ -24,6 +24,9 @@ function getUrlParameter(name) {
 };
 let marsRoverType = getUrlParameter('marsApiRoverData');
 
+let marsSol = getUrlParameter('marsSol');
+document.getElementById('marsSol').value = marsSol;
+
 highLightButtonByRoverType(marsRoverType);
 
 function highLightButtonByRoverType(roverType) {

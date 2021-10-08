@@ -4,5 +4,5 @@ import ir.omidashouri.marsroverapi.model.responses.MarsRoverApiResponse;
 
 public interface MarsRoverApiService {
 
-    MarsRoverApiResponse getRoverData(String roverType);
+    MarsRoverApiResponse getRoverData(String roverType, Integer marsSol);
 }
