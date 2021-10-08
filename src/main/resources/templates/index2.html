@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Mars Rover Api App</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous"/>
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css"
+          integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" rel="stylesheet"/>
 </head>
 <body>
 <div class="container">
     <h2>Welcome to the Mars Rover Api</h2>
 
     <form action="/" id="frmRoverType" method="get">
-        <input th:field="${homeDto.marsApiRoverData}" type="hidden">
+        <input id="marsApiRoverData" name="marsApiRoverData" type="hidden" value="">
         <div aria-label="Basic example" class="btn-group btn-group-lg" role="group" style="margin: 2em 0em;">
             <button class="btn btn-primary" id="marsApiCuriosity" type="button">Curiosity</button>
             <button class="btn btn-primary" id="marsApiOpportunity" type="button">Opportunity</button>
@@ -18,13 +19,13 @@
         </div>
 
         <div class="form-check">
-            <label class="form-check-label">Default checkbox</label>
-            <input class="form-check-input" th:field="${homeDto.defaultCheck1}" type="checkbox">
+            <input class="form-check-input" id="defaultCheck1" name="defaultCheck1" type="checkbox" value="">
+            <label class="form-check-label" for="defaultCheck1">Default checkbox</label>
         </div>
 
         <div class="form-group" style="margin: 2em 0em;">
-            <label class="form-label col-form-label-lg"> Mars Sol (aka mars day): </label>
-            <input class="form-control form-control-lg" min="0" th:field="${homeDto.marsSol}" type="number"/>
+            <label class="form-label col-form-label-lg" for="marsSol"> Mars Sol (aka mars day): </label>
+            <input class="form-control form-control-lg" id="marsSol" min="0" name="marsSol" type="number" value="1"/>
         </div>
         <button class="btn btn-primary btn-lg" type="submit">Submit</button>
     </form>
@@ -53,6 +54,7 @@
 <!--<div th:text="${marsRoverData}">static marsRoverData</div>-->
 
 <script src="/js/index.js" type="text/javascript"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
+<script crossorigin="anonymous" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

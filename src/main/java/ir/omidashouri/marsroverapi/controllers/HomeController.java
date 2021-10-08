@@ -1,5 +1,6 @@
 package ir.omidashouri.marsroverapi.controllers;
 
+import ir.omidashouri.marsroverapi.dto.HomeDto;
 import ir.omidashouri.marsroverapi.model.responses.MarsRoverApiResponse;
 import ir.omidashouri.marsroverapi.services.MarsRoverApiService;
 import lombok.RequiredArgsConstructor;
@@ -16,8 +17,22 @@ public class HomeController {
 
     private final MarsRoverApiService marsRoverApiService;
 
-
     @GetMapping(value = {"/"})
+    public String getHomeView(ModelMap modelMap, HomeDto homeDto) {
+        if (StringUtils.isEmpty(homeDto.getMarsApiRoverData())) {
+            homeDto.setMarsApiRoverData("opportunity");
+        }
+        if (homeDto.getMarsSol() == null) {
+            homeDto.setMarsSol(1);
+        }
+        MarsRoverApiResponse marsRoverApiResponse = marsRoverApiService
+                .getRoverData(homeDto.getMarsApiRoverData(), homeDto.getMarsSol());
+        modelMap.put("marsRoverData", marsRoverApiResponse);
+        modelMap.put("homeDto", homeDto);
+        return "index";
+    }
+
+    @GetMapping(value = {"/2"})
     public String getHomeView(ModelMap modelMap, @RequestParam(required = false) String marsApiRoverData,
                               @RequestParam(required = false) Integer marsSol,
                               @RequestParam(required = false) Boolean defaultCheck1) {
@@ -29,7 +44,7 @@ public class HomeController {
         }
         MarsRoverApiResponse marsRoverApiResponse = marsRoverApiService.getRoverData(marsApiRoverData, marsSol);
         modelMap.put("marsRoverData", marsRoverApiResponse);
-        return "index";
+        return "index2";
     }
 
 
