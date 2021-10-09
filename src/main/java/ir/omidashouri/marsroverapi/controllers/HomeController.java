@@ -26,7 +26,7 @@ public class HomeController {
             homeDto.setMarsSol(1);
         }
         MarsRoverApiResponse marsRoverApiResponse = marsRoverApiService
-                .getRoverData(homeDto.getMarsApiRoverData(), homeDto.getMarsSol());
+                .getRoverData(homeDto);
         modelMap.put("marsRoverData", marsRoverApiResponse);
         modelMap.put("homeDto", homeDto);
         return "index";
