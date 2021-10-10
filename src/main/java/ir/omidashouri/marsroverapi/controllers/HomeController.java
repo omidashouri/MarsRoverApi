@@ -31,6 +31,7 @@ public class HomeController {
                 .getRoverData(homeDto);
         modelMap.put("marsRoverData", marsRoverApiResponse);
         modelMap.put("homeDto", homeDto);
+        modelMap.put("validCameras", marsRoverApiService.getValidCameras().get(homeDto.getMarsApiRoverData()));
         return "index";
     }
 

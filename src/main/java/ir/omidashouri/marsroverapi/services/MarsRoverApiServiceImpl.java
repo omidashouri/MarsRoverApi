@@ -68,4 +68,8 @@ public class MarsRoverApiServiceImpl implements MarsRoverApiService {
         }
         return urls;
     }
+
+    public Map<String, List<String>> getValidCameras() {
+        return validCameras;
+    }
 }
