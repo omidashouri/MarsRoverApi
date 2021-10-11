@@ -11,7 +11,8 @@
     <h2>Welcome to the Mars Rover Api</h2>
 
     <form action="/" id="frmRoverType" method="get">
-        <input th:field="${homeDto.marsApiRoverData}" type="hidden">
+        <input th:field="${homeDto.marsApiRoverData}" type="hidden"/>
+        <input thLfield="${homeDto.userId}" type="hidden"/>
         <div aria-label="Basic example" class="btn-group btn-group-lg" role="group" style="margin: 2em 0em;">
             <button class="btn btn-primary" id="marsApiCuriosity" type="button">Curiosity</button>
             <button class="btn btn-primary" id="marsApiOpportunity" type="button">Opportunity</button>

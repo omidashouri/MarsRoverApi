@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class HomeDto {
 
+    private Long userId;
     private String marsApiRoverData;
     private Integer marsSol;
     private Boolean cameraFhaz;

@@ -5,6 +5,16 @@ function curiosityFunction() {
     alert('salam');
 }*/
 
+// let userId = localStorage.getItem('userId');
+let userId = getUrlParameter('userId');
+if(userId == null || userId.length == ''){
+    userId = localStorage.getItem('userId');
+}
+if(userId != null && userId != '' && userId != 'null'){
+    localStorage.setItem('userId', userId);
+    document.getElementById('userId').value = userId;
+}
+
 let marsApiButtons = document.querySelectorAll("button[id*='marsApi']");
 marsApiButtons.forEach(button => button.addEventListener('click', buttonFunction));
 
