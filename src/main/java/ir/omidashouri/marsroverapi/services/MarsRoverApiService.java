@@ -15,5 +15,7 @@ public interface MarsRoverApiService {
 
     Map<String, List<String>> getValidCameras();
 
-    void save(HomeDto homeDto);
+    HomeDto save(HomeDto homeDto);
+
+    HomeDto findByUserId(Long userId);
 }

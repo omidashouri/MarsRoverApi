@@ -24,7 +24,34 @@ public class HomeController {
 
 //    ModelMap and ModelView is through GET method because VIEW IS JUST IN GET
     @GetMapping(value = {"/"})
-    public String getHomeView(ModelMap modelMap, HomeDto homeDto) throws InvocationTargetException, IllegalAccessException {
+    public String getHomeView(ModelMap modelMap, Long userId) throws InvocationTargetException, IllegalAccessException {
+        HomeDto homeDto = new HomeDto();
+        homeDto.setMarsApiRoverData("Opportunity");
+        homeDto.setMarsSol(1);
+
+        if(userId == null) {
+            homeDto = marsRoverApiService.save(homeDto);
+        }else{
+            homeDto = marsRoverApiService.findByUserId(userId);
+        }
+        MarsRoverApiResponse marsRoverApiResponse = marsRoverApiService.getRoverData(homeDto);
+        modelMap.put("marsRoverData", marsRoverApiResponse);
+        modelMap.put("homeDto", homeDto);
+        modelMap.put("validCameras", marsRoverApiService.getValidCameras().get(homeDto.getMarsApiRoverData()));
+        return "index";
+    }
+
+    //we specify the name of object which we send through POST in modelAttribute
+   //we donat have VIEW with POST
+    @PostMapping(value = {"/"})
+    public String postHomeView(@ModelAttribute(value = "homeDto")HomeDto homeDto) throws InvocationTargetException, IllegalAccessException {
+        homeDto = marsRoverApiService.save(homeDto);
+        System.out.println(homeDto);
+        return "redirect:/?userId="+homeDto.getUserId();
+    }
+
+    @GetMapping(value = {"/3"})
+    public String getHomeView3(ModelMap modelMap, HomeDto homeDto) throws InvocationTargetException, IllegalAccessException {
         if (StringUtils.isEmpty(homeDto.getMarsApiRoverData())) {
             homeDto.setMarsApiRoverData("Opportunity");
         }
@@ -37,15 +64,6 @@ public class HomeController {
         modelMap.put("homeDto", homeDto);
         modelMap.put("validCameras", marsRoverApiService.getValidCameras().get(homeDto.getMarsApiRoverData()));
         return "index";
-    }
-
-    //we specify the name of object which we send through POST in modelAttribute
-   //we donat have VIEW with POST
-    @PostMapping(value = {"/"})
-    public String postHomeView(@ModelAttribute(value = "homeDto")HomeDto homeDto) throws InvocationTargetException, IllegalAccessException {
-        marsRoverApiService.save(homeDto);
-        System.out.println(homeDto);
-        return "redirect:/";
     }
 
     @GetMapping(value = {"/2"})

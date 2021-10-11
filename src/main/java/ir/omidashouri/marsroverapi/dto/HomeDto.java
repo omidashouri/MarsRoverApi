@@ -15,6 +15,7 @@ public class HomeDto {
     private Long  id;
 
     @Column(name = "user_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
     @Column(name = "mars_api_rover_data")

@@ -76,7 +76,13 @@ public class MarsRoverApiServiceImpl implements MarsRoverApiService {
     }
 
     @Override
-    public void save(HomeDto homeDto) {
-        preferencesRepository.save(homeDto);
+    public HomeDto save(HomeDto homeDto) {
+        homeDto.setUserId(Long.valueOf(new Random().nextInt(1000)));
+        return preferencesRepository.save(homeDto);
+    }
+
+    @Override
+    public HomeDto findByUserId(Long userId) {
+        return preferencesRepository.findByUserId(userId);
     }
 }
