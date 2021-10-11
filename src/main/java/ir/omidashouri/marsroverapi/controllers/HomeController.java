@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.lang.reflect.InvocationTargetException;
@@ -33,6 +35,12 @@ public class HomeController {
         modelMap.put("homeDto", homeDto);
         modelMap.put("validCameras", marsRoverApiService.getValidCameras().get(homeDto.getMarsApiRoverData()));
         return "index";
+    }
+
+    @PostMapping(value = {"/"})
+    public String postHomeView(@ModelAttribute(value = "homeDto")HomeDto homeDto) throws InvocationTargetException, IllegalAccessException {
+        System.out.println(homeDto);
+        return "redirect:/";
     }
 
     @GetMapping(value = {"/2"})
