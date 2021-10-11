@@ -14,4 +14,6 @@ public interface MarsRoverApiService {
     MarsRoverApiResponse getRoverData(String roverType, Integer marsSol);
 
     Map<String, List<String>> getValidCameras();
+
+    void save(HomeDto homeDto);
 }

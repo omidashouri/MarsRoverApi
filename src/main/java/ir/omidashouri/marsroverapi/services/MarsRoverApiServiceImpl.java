@@ -3,6 +3,7 @@ package ir.omidashouri.marsroverapi.services;
 import ir.omidashouri.marsroverapi.dto.HomeDto;
 import ir.omidashouri.marsroverapi.model.responses.MarsPhoto;
 import ir.omidashouri.marsroverapi.model.responses.MarsRoverApiResponse;
+import ir.omidashouri.marsroverapi.repository.PreferencesRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 public class MarsRoverApiServiceImpl implements MarsRoverApiService {
 
     private final RestTemplate restTemplate;
+    private final PreferencesRepository preferencesRepository;
 
     private Map<String, List<String>> validCameras = new HashMap<>() {
         {
@@ -71,5 +73,10 @@ public class MarsRoverApiServiceImpl implements MarsRoverApiService {
 
     public Map<String, List<String>> getValidCameras() {
         return validCameras;
+    }
+
+    @Override
+    public void save(HomeDto homeDto) {
+        preferencesRepository.save(homeDto);
     }
 }

@@ -21,6 +21,8 @@ public class HomeController {
 
     private final MarsRoverApiService marsRoverApiService;
 
+
+//    ModelMap and ModelView is through GET method because VIEW IS JUST IN GET
     @GetMapping(value = {"/"})
     public String getHomeView(ModelMap modelMap, HomeDto homeDto) throws InvocationTargetException, IllegalAccessException {
         if (StringUtils.isEmpty(homeDto.getMarsApiRoverData())) {
@@ -37,8 +39,11 @@ public class HomeController {
         return "index";
     }
 
+    //we specify the name of object which we send through POST in modelAttribute
+   //we donat have VIEW with POST
     @PostMapping(value = {"/"})
     public String postHomeView(@ModelAttribute(value = "homeDto")HomeDto homeDto) throws InvocationTargetException, IllegalAccessException {
+        marsRoverApiService.save(homeDto);
         System.out.println(homeDto);
         return "redirect:/";
     }
