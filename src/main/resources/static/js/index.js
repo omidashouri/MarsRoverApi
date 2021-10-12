@@ -32,13 +32,13 @@ function getUrlParameter(name) {
     var results = regex.exec(location.search);
     return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 };
-let marsRoverType = document.getElementById('marsApiRoverData').value;
 
 let marsSol = document.getElementById('marsSol').value;
 if(marsSol != null &&  marsSol != ''  && marsSol >= 0){
     document.getElementById('marsSol').value = marsSol;
 }
 
+let marsRoverType = document.getElementById('marsApiRoverData').value;
 highLightButtonByRoverType(marsRoverType);
 
 function highLightButtonByRoverType(roverType) {
