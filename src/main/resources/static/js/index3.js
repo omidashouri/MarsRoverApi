@@ -7,24 +7,13 @@ function curiosityFunction() {
 
 // let userId = localStorage.getItem('userId');
 let userId = getUrlParameter('userId');
-if (userId == null || userId.length == '') {
+if(userId == null || userId.length == ''){
     userId = localStorage.getItem('userId');
-    if (userId == null || userId == '') {
+    if(userId == null || userId == ''){
         document.getElementById('createUser').value = true;
-    } else {
-
-        /*        fetch('/savedPreferences?userId=' + userId)
-            .then(response =>  response.json())
-            .then(jsonResponse => console.log(jsonResponse));*/
-
-        /*        fetch('/savedPreferences?userId='+userId)
-                    .then(function(response){return response.json();})
-                    .then(function(myJson){console.log(JSON.stringify(myJson));});*/
-
-        window.location.href = '/?userId='+userId;
     }
 }
-if (userId != null && userId != '' && userId != 'null') {
+if(userId != null && userId != '' && userId != 'null'){
     localStorage.setItem('userId', userId);
     document.getElementById('userId').value = userId;
 }
@@ -48,7 +37,7 @@ function getUrlParameter(name) {
 };
 
 let marsSol = document.getElementById('marsSol').value;
-if (marsSol != null && marsSol != '' && marsSol >= 0) {
+if(marsSol != null &&  marsSol != ''  && marsSol >= 0){
     document.getElementById('marsSol').value = marsSol;
 }
 

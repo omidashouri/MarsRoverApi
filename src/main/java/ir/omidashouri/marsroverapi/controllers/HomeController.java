@@ -8,10 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -62,6 +59,16 @@ public class HomeController {
     public String postHomeView(@ModelAttribute(value = "homeDto")HomeDto homeDto) throws InvocationTargetException, IllegalAccessException {
         homeDto = marsRoverApiService.save(homeDto);
         return "redirect:/?userId="+homeDto.getUserId();
+    }
+
+    @GetMapping(value = {"/savedPreferences"})
+    @ResponseBody //this annotation say the response is a object not a html code and we have not template error
+    public HomeDto getSavedPreferences(Long userId) {
+        if(userId != null){
+            return marsRoverApiService.findByUserId(userId);
+        } else{
+            return createDefaultHomeDto(userId);
+        }
     }
 
     @GetMapping(value = {"/3"})
