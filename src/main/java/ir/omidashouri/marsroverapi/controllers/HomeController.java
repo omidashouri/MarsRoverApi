@@ -24,21 +24,36 @@ public class HomeController {
 
 //    ModelMap and ModelView is through GET method because VIEW IS JUST IN GET
     @GetMapping(value = {"/"})
-    public String getHomeView(ModelMap modelMap, Long userId) throws InvocationTargetException, IllegalAccessException {
-        HomeDto homeDto = new HomeDto();
-        homeDto.setMarsApiRoverData("Opportunity");
-        homeDto.setMarsSol(1);
+    public String getHomeView(ModelMap modelMap, Long userId, Boolean createUser) throws InvocationTargetException, IllegalAccessException {
 
-        if(userId == null) {
+        HomeDto homeDto = createDefaultHomeDto(userId);
+
+        if(Boolean.TRUE.equals(createUser) && userId == null) {
             homeDto = marsRoverApiService.save(homeDto);
         }else{
             homeDto = marsRoverApiService.findByUserId(userId);
+            if(homeDto == null){
+                homeDto = createDefaultHomeDto(userId);
+            }
         }
+
         MarsRoverApiResponse marsRoverApiResponse = marsRoverApiService.getRoverData(homeDto);
         modelMap.put("marsRoverData", marsRoverApiResponse);
         modelMap.put("homeDto", homeDto);
         modelMap.put("validCameras", marsRoverApiService.getValidCameras().get(homeDto.getMarsApiRoverData()));
+        if(!Boolean.TRUE.equals(homeDto.getRememberPreferences()) && userId != null){
+            HomeDto defaultHomeDto = createDefaultHomeDto(userId);
+            marsRoverApiService.save(defaultHomeDto);
+        }
         return "index";
+    }
+
+    private HomeDto createDefaultHomeDto(Long userId) {
+        HomeDto homeDto = new HomeDto();
+        homeDto.setMarsApiRoverData("Opportunity");
+        homeDto.setMarsSol(1);
+        homeDto.setUserId(userId);
+        return homeDto;
     }
 
     //we specify the name of object which we send through POST in modelAttribute
@@ -46,7 +61,6 @@ public class HomeController {
     @PostMapping(value = {"/"})
     public String postHomeView(@ModelAttribute(value = "homeDto")HomeDto homeDto) throws InvocationTargetException, IllegalAccessException {
         homeDto = marsRoverApiService.save(homeDto);
-        System.out.println(homeDto);
         return "redirect:/?userId="+homeDto.getUserId();
     }
 

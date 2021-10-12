@@ -9,6 +9,9 @@ function curiosityFunction() {
 let userId = getUrlParameter('userId');
 if(userId == null || userId.length == ''){
     userId = localStorage.getItem('userId');
+    if(userId == null || userId == ''){
+        document.getElementById('createUser').value = true;
+    }
 }
 if(userId != null && userId != '' && userId != 'null'){
     localStorage.setItem('userId', userId);
